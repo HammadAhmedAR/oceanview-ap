@@ -1,0 +1,7 @@
+/* ============================================
+   OceanView — Login Page Overrides
+   ============================================ */
+
+.input-group:focus-within {
+    border-color: #00b4d8;
+}
