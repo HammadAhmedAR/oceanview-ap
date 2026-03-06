@@ -13,6 +13,9 @@
     <link href="css/oceanview-common.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/staff.css" rel="stylesheet">
+    <link href="css/guests.css" rel="stylesheet">
+    <link href="css/reservations.css" rel="stylesheet">
+    <link href="css/billing.css" rel="stylesheet">
 </head>
 
 <body>
@@ -51,42 +54,70 @@
             <h1>Welcome back, <span><%= displayName %></span>!</h1>
             <% if (isAdmin) { %>
                 <p>Admin Dashboard &mdash; Manage rooms, bookings, guests, and staff from here.</p>
-                <a href="staff-list" class="btn-manage-staff" id="manageStaffBtn">
-                    <i class="bi bi-people-fill"></i> Manage Staff
-                </a>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="staff-list" class="btn-manage-staff" id="manageStaffBtn">
+                        <i class="bi bi-people-fill"></i> Manage Staff
+                    </a>
+                    <a href="guests" class="btn-manage-guests" id="manageGuestsBtn">
+                        <i class="bi bi-person-vcard"></i> Manage Guests
+                    </a>
+                    <a href="reservations" class="btn-manage-reservations" id="manageReservationsBtn">
+                        <i class="bi bi-calendar-week"></i> Manage Reservations
+                    </a>
+                    <a href="payment-history" class="btn-manage-billing" id="paymentHistoryBtn">
+                        <i class="bi bi-receipt"></i> Payment History
+                    </a>
+                </div>
             <% } else { %>
-                <p>Staff Dashboard &mdash; View your assigned rooms and bookings from here.</p>
+                <p>Staff Dashboard &mdash; Manage guests and reservations from here.</p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="guests" class="btn-manage-guests" id="manageGuestsBtn">
+                        <i class="bi bi-person-vcard"></i> Manage Guests
+                    </a>
+                    <a href="reservations" class="btn-manage-reservations" id="manageReservationsBtn">
+                        <i class="bi bi-calendar-week"></i> Manage Reservations
+                    </a>
+                    <a href="payment-history" class="btn-manage-billing" id="paymentHistoryBtn">
+                        <i class="bi bi-receipt"></i> Payment History
+                    </a>
+                </div>
             <% } %>
         </div>
 
         <!-- Stat Cards -->
+        <%
+            Integer totalRooms = (Integer) request.getAttribute("totalRooms");
+            Integer bookedToday = (Integer) request.getAttribute("bookedToday");
+            Integer totalGuests = (Integer) request.getAttribute("totalGuests");
+            Integer availableRooms = (Integer) request.getAttribute("availableRooms");
+        %>
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card">
                     <div class="stat-icon blue"><i class="bi bi-door-open"></i></div>
                     <h5>Total Rooms</h5>
-                    <div class="stat-value">24</div>
+                    <div class="stat-value"><%= totalRooms != null ? totalRooms : 0 %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card">
                     <div class="stat-icon green"><i class="bi bi-calendar-check"></i></div>
                     <h5>Booked Today</h5>
-                    <div class="stat-value">18</div>
+                    <div class="stat-value"><%= bookedToday != null ? bookedToday : 0 %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card">
                     <div class="stat-icon orange"><i class="bi bi-people"></i></div>
                     <h5>Guests</h5>
-                    <div class="stat-value">42</div>
+                    <div class="stat-value"><%= totalGuests != null ? totalGuests : 0 %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stat-card">
                     <div class="stat-icon purple"><i class="bi bi-check-circle"></i></div>
                     <h5>Available</h5>
-                    <div class="stat-value">6</div>
+                    <div class="stat-value"><%= availableRooms != null ? availableRooms : 0 %></div>
                 </div>
             </div>
         </div>

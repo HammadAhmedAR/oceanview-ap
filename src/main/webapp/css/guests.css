@@ -1,0 +1,74 @@
+/* ============================================
+   OceanView — Guest Management Pages
+   ============================================ */
+
+/* --- Manage Guests Button (Dashboard) --- */
+.btn-manage-guests {
+    background: linear-gradient(135deg, #b197fc, #7048e8);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.btn-manage-guests:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(112, 72, 232, 0.4);
+    color: #fff;
+}
+
+/* --- Guest action buttons --- */
+.btn-add-guest {
+    background: linear-gradient(135deg, #b197fc, #7048e8);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.btn-add-guest:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(112, 72, 232, 0.35);
+    color: #fff;
+}
+
+/* Guest form card icon color */
+.guest-form-card h3 i {
+    color: #b197fc;
+}
+
+.btn-save-guest {
+    background: linear-gradient(135deg, #b197fc, #7048e8);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+.btn-save-guest:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(112, 72, 232, 0.4);
+    color: #fff;
+}
+.btn-save-guest:active { transform: translateY(0); }
+
+/* Email column style */
+.email-text {
+    color: #b197fc;
+    font-size: 0.85rem;
+}

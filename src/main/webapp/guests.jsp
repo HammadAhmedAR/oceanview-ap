@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.oceanview.model.User" %>
+<%@ page import="com.oceanview.model.Guest" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OceanView &mdash; Staff List</title>
+    <title>OceanView &mdash; Guests</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -14,17 +15,19 @@
     <link href="css/oceanview-common.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/staff.css" rel="stylesheet">
+    <link href="css/guests.css" rel="stylesheet">
 </head>
 
 <body>
 
 <%
     User loggedUser = (User) session.getAttribute("loggedUser");
-    if (loggedUser == null || !"ADMIN".equals(loggedUser.getRole())) {
+    if (loggedUser == null) {
         response.sendRedirect("login.jsp");
         return;
     }
-    List<User> staffList = (List<User>) request.getAttribute("staffList");
+    String displayRole = loggedUser.getRole() != null ? loggedUser.getRole() : "STAFF";
+    List<Guest> guestList = (List<Guest>) request.getAttribute("guestList");
 %>
 
 <!-- Navbar -->
@@ -34,7 +37,7 @@
             <span class="brand-dot"></span> OceanView
         </span>
         <div class="d-flex align-items-center gap-3">
-            <span class="role-badge">ADMIN</span>
+            <span class="role-badge"><%= displayRole %></span>
             <a href="logout" class="btn btn-logout">
                 <i class="bi bi-box-arrow-right me-1"></i>Logout
             </a>
@@ -47,43 +50,45 @@
     <div class="container">
 
         <div class="page-header">
-            <h2><i class="bi bi-people-fill"></i> Staff Management</h2>
+            <h2><i class="bi bi-person-vcard"></i> Guest Management</h2>
             <div class="d-flex gap-2">
                 <a href="dashboard" class="btn-back">
                     <i class="bi bi-arrow-left"></i> Dashboard
                 </a>
-                <a href="add-staff" class="btn-add-staff" id="addStaffBtn">
-                    <i class="bi bi-person-plus"></i> Add Staff
+                <a href="add-guest" class="btn-add-guest" id="addGuestBtn">
+                    <i class="bi bi-person-plus"></i> Add Guest
                 </a>
             </div>
         </div>
 
         <div class="glass-table-wrapper">
-            <% if (staffList != null && !staffList.isEmpty()) { %>
-            <table class="glass-table" id="staffTable">
+            <% if (guestList != null && !guestList.isEmpty()) { %>
+            <table class="glass-table" id="guestTable">
                 <thead>
                     <tr>
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>Role</th>
+                        <th>Guest ID</th>
+                        <th>Full Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (User staff : staffList) { %>
+                    <% for (Guest guest : guestList) { %>
                     <tr>
-                        <td><%= staff.getUserId() %></td>
-                        <td><%= staff.getUsername() %></td>
-                        <td><span class="table-role-badge"><%= staff.getRole() %></span></td>
+                        <td><%= guest.getGuestId() %></td>
+                        <td><%= guest.getFullName() %></td>
+                        <td><%= guest.getPhone() %></td>
+                        <td><span class="email-text"><%= guest.getEmail() %></span></td>
                         <td>
                             <div class="d-flex gap-2">
-                                <a href="edit-staff?userId=<%= staff.getUserId() %>"
+                                <a href="update-guest?guestId=<%= guest.getGuestId() %>"
                                    class="btn-edit">
                                     <i class="bi bi-pencil me-1"></i>Edit
                                 </a>
-                                <a href="delete-staff?userId=<%= staff.getUserId() %>"
+                                <a href="delete-guest?guestId=<%= guest.getGuestId() %>"
                                    class="btn-delete"
-                                   onclick="return confirm('Are you sure you want to delete this staff member?')">
+                                   onclick="return confirm('Are you sure you want to delete this guest?')">
                                     <i class="bi bi-trash me-1"></i>Delete
                                 </a>
                             </div>
@@ -94,8 +99,8 @@
             </table>
             <% } else { %>
             <div class="empty-state">
-                <i class="bi bi-people"></i>
-                <p>No staff members found. Click <strong>Add Staff</strong> to create one.</p>
+                <i class="bi bi-person-vcard"></i>
+                <p>No guests registered yet. Click <strong>Add Guest</strong> to register one.</p>
             </div>
             <% } %>
         </div>

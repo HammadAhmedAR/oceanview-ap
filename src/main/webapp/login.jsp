@@ -19,12 +19,6 @@
 
 <body class="page-auth">
 
-    <!-- Animated bubbles -->
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
     <div class="glass-card">
 
         <div class="brand-icon blue">

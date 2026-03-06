@@ -19,12 +19,6 @@
 
 <body class="page-landing">
 
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
     <div class="hero-card">
         <div class="hero-icon">
             <i class="bi bi-water"></i>

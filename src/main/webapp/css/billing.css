@@ -1,0 +1,201 @@
+/* ============================================
+   OceanView — Billing & Payment Pages
+   ============================================ */
+
+/* --- Manage Billing Button (Dashboard) --- */
+.btn-manage-billing {
+    background: linear-gradient(135deg, #ffd43b, #fab005);
+    border: none;
+    color: #1a1a2e;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-manage-billing:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(250, 176, 5, 0.4);
+    color: #1a1a2e;
+}
+
+/* --- Generate Bill Button --- */
+.btn-generate-bill {
+    background: linear-gradient(135deg, #ffd43b, #fab005);
+    border: none;
+    color: #1a1a2e;
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.btn-generate-bill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(250, 176, 5, 0.35);
+    color: #1a1a2e;
+}
+
+/* --- Invoice Card --- */
+.invoice-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 750px;
+    margin: 0 auto;
+    animation: slideUp 0.6s ease-out;
+}
+.invoice-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.invoice-card h2 i { color: #ffd43b; }
+
+.invoice-section-title {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --- Bill Status Badges --- */
+.bill-generated {
+    display: inline-block;
+    background: rgba(255, 212, 59, 0.15);
+    color: #ffd43b;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.bill-paid {
+    display: inline-block;
+    background: rgba(81, 207, 102, 0.15);
+    color: #51cf66;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.bill-cancelled {
+    display: inline-block;
+    background: rgba(220, 53, 69, 0.15);
+    color: #ff6b6b;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Payment status badges */
+.payment-completed {
+    display: inline-block;
+    background: rgba(81, 207, 102, 0.15);
+    color: #51cf66;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+.payment-pending {
+    display: inline-block;
+    background: rgba(255, 212, 59, 0.15);
+    color: #ffd43b;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+/* --- Record Payment Button --- */
+.btn-record-payment {
+    background: linear-gradient(135deg, #51cf66, #2b8a3e);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.btn-record-payment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(81, 207, 102, 0.35);
+    color: #fff;
+}
+
+.btn-submit-payment {
+    background: linear-gradient(135deg, #51cf66, #2b8a3e);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+.btn-submit-payment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(81, 207, 102, 0.4);
+    color: #fff;
+}
+
+/* Print button */
+.btn-print {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-print:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* Print styles */
+@media print {
+    .navbar, .btn-back, .btn-record-payment, .btn-print, .btn-generate-bill { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .invoice-card { border: 1px solid #ddd; box-shadow: none; background: #fff !important; }
+    .detail-row { border-color: #eee; }
+    .detail-label { color: #666; }
+    .detail-value { color: #000; }
+}
