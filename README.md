@@ -137,8 +137,8 @@ cd oceanview-ap
 Edit `src/main/java/com/oceanview/util/DBConnection.java`:
 ```java
 private static final String URL      = "jdbc:postgresql://localhost:5432/oceanview";
-private static final String USERNAME = "your_db_user";
-private static final String PASSWORD = "your_db_password";
+private static final String USERNAME = "postgres";
+private static final String PASSWORD = "postgres";
 ```
 
 ### 3. Create the database and run SQL schema
