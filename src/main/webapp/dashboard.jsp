@@ -16,6 +16,7 @@
     <link href="css/guests.css" rel="stylesheet">
     <link href="css/reservations.css" rel="stylesheet">
     <link href="css/billing.css" rel="stylesheet">
+    <link href="css/help.css" rel="stylesheet">
 </head>
 
 <body>
@@ -67,6 +68,9 @@
                     <a href="payment-history" class="btn-manage-billing" id="paymentHistoryBtn">
                         <i class="bi bi-receipt"></i> Payment History
                     </a>
+                    <a href="help" class="btn-help" id="helpBtn">
+                        <i class="bi bi-question-circle"></i> Help
+                    </a>
                 </div>
             <% } else { %>
                 <p>Staff Dashboard &mdash; Manage guests and reservations from here.</p>
@@ -79,6 +83,9 @@
                     </a>
                     <a href="payment-history" class="btn-manage-billing" id="paymentHistoryBtn">
                         <i class="bi bi-receipt"></i> Payment History
+                    </a>
+                    <a href="help" class="btn-help" id="helpBtn">
+                        <i class="bi bi-question-circle"></i> Help
                     </a>
                 </div>
             <% } %>
@@ -93,32 +100,40 @@
         %>
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <a href="rooms?filter=all" style="text-decoration:none; color:inherit;">
+                <div class="stat-card" style="cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
                     <div class="stat-icon blue"><i class="bi bi-door-open"></i></div>
                     <h5>Total Rooms</h5>
                     <div class="stat-value"><%= totalRooms != null ? totalRooms : 0 %></div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <a href="rooms?filter=booked" style="text-decoration:none; color:inherit;">
+                <div class="stat-card" style="cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
                     <div class="stat-icon green"><i class="bi bi-calendar-check"></i></div>
-                    <h5>Booked Today</h5>
+                    <h5>Booked</h5>
                     <div class="stat-value"><%= bookedToday != null ? bookedToday : 0 %></div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <a href="guests" style="text-decoration:none; color:inherit;">
+                <div class="stat-card" style="cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
                     <div class="stat-icon orange"><i class="bi bi-people"></i></div>
                     <h5>Guests</h5>
                     <div class="stat-value"><%= totalGuests != null ? totalGuests : 0 %></div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <a href="rooms?filter=available" style="text-decoration:none; color:inherit;">
+                <div class="stat-card" style="cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
                     <div class="stat-icon purple"><i class="bi bi-check-circle"></i></div>
                     <h5>Available</h5>
                     <div class="stat-value"><%= availableRooms != null ? availableRooms : 0 %></div>
                 </div>
+                </a>
             </div>
         </div>
 

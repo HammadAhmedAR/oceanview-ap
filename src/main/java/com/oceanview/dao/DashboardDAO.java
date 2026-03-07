@@ -12,10 +12,9 @@ public class DashboardDAO {
         return countQuery("SELECT COUNT(*) FROM rooms");
     }
 
-    public int getBookedToday() {
+    public int getBookedRooms() {
         return countQuery(
-            "SELECT COUNT(*) FROM reservations " +
-            "WHERE status = 'ACTIVE' AND check_in_date <= CURRENT_DATE AND check_out_date > CURRENT_DATE"
+            "SELECT COUNT(DISTINCT room_id) FROM reservations WHERE status = 'ACTIVE'"
         );
     }
 
@@ -26,8 +25,7 @@ public class DashboardDAO {
     public int getAvailableRooms() {
         return countQuery(
             "SELECT COUNT(*) FROM rooms WHERE room_id NOT IN (" +
-            "SELECT room_id FROM reservations " +
-            "WHERE status = 'ACTIVE' AND check_in_date <= CURRENT_DATE AND check_out_date > CURRENT_DATE)"
+            "SELECT DISTINCT room_id FROM reservations WHERE status = 'ACTIVE')"
         );
     }
 

@@ -61,4 +61,44 @@ public class RoomDAO {
 
         return room;
     }
+
+    /**
+     * Returns all rooms with current booking status.
+     * Each Object[] contains: Room, bookingStatus (String), guestName (String or null)
+     */
+    public List<Object[]> getRoomsWithBookingInfo() {
+        List<Object[]> results = new ArrayList<>();
+        String sql = "SELECT rm.*, " +
+                     "r.reservation_number, " +
+                     "g.first_name || ' ' || g.last_name AS guest_name " +
+                     "FROM rooms rm " +
+                     "LEFT JOIN reservations r ON rm.room_id = r.room_id " +
+                     "AND r.status = 'ACTIVE' " +
+                     "LEFT JOIN guests g ON r.guest_id = g.guest_id " +
+                     "ORDER BY rm.room_code";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Room room = new Room();
+                room.setRoomId(rs.getInt("room_id"));
+                room.setRoomCode(rs.getString("room_code"));
+                room.setRoomType(rs.getString("room_type"));
+                room.setPricePerNight(rs.getBigDecimal("price_per_night"));
+                room.setStatus(rs.getString("status"));
+
+                String guestName = rs.getString("guest_name");
+                String bookingStatus = (guestName != null) ? "BOOKED" : "AVAILABLE";
+
+                results.add(new Object[]{ room, bookingStatus, guestName });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
 }

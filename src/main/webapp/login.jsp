@@ -87,6 +87,10 @@
             <a href="register.jsp">Create an account</a>
         </div>
 
+        <div class="link-row mt-2">
+            <a href="index.jsp"><i class="bi bi-arrow-left"></i> Back to Home</a>
+        </div>
+
     </div>
 
     <!-- Bootstrap JS -->

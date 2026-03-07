@@ -74,6 +74,10 @@
             <a href="login.jsp">Sign in</a>
         </div>
 
+        <div class="link-row mt-2">
+            <a href="index.jsp"><i class="bi bi-arrow-left"></i> Back to Home</a>
+        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

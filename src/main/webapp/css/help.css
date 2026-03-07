@@ -1,0 +1,88 @@
+/* ============================================
+   OceanView — Help Page Styles
+   ============================================ */
+
+.help-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.help-nav {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.help-nav a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+.help-nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.help-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1rem;
+    animation: slideUp 0.5s ease-out;
+}
+.help-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+.help-card h4 i {
+    font-size: 1.2rem;
+    color: #00b4d8;
+}
+.help-card p, .help-card li {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+.help-card ol {
+    padding-left: 1.2rem;
+    margin: 0;
+}
+.help-card ol li {
+    margin-bottom: 0.3rem;
+}
+
+.btn-help {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 500;
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-help:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+}

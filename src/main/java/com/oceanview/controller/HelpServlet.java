@@ -1,6 +1,5 @@
 package com.oceanview.controller;
 
-import com.oceanview.dao.DashboardDAO;
 import com.oceanview.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,10 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/dashboard")
-public class DashboardServlet extends HttpServlet {
-
-    private final DashboardDAO dashboardDAO = new DashboardDAO();
+@WebServlet("/help")
+public class HelpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,11 +22,6 @@ public class DashboardServlet extends HttpServlet {
             return;
         }
 
-        request.setAttribute("totalRooms", dashboardDAO.getTotalRooms());
-        request.setAttribute("bookedToday", dashboardDAO.getBookedRooms());
-        request.setAttribute("totalGuests", dashboardDAO.getTotalGuests());
-        request.setAttribute("availableRooms", dashboardDAO.getAvailableRooms());
-
-        request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("help.jsp").forward(request, response);
     }
 }
