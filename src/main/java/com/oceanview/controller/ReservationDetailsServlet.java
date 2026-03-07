@@ -1,7 +1,9 @@
 package com.oceanview.controller;
 
+import com.oceanview.model.Bill;
 import com.oceanview.model.Reservation;
 import com.oceanview.model.User;
+import com.oceanview.service.BillingService;
 import com.oceanview.service.ReservationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import java.io.IOException;
 public class ReservationDetailsServlet extends HttpServlet {
 
     private final ReservationService reservationService = new ReservationService();
+    private final BillingService billingService = new BillingService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +40,14 @@ public class ReservationDetailsServlet extends HttpServlet {
             response.sendRedirect("reservations");
             return;
         }
+
+        // Check bill/payment status for this reservation
+        Bill bill = billingService.getBillByReservationId(reservation.getReservationId());
+        String paymentStatus = "UNPAID";
+        if (bill != null && "PAID".equals(bill.getBillStatus())) {
+            paymentStatus = "PAID";
+        }
+        request.setAttribute("paymentStatus", paymentStatus);
 
         request.setAttribute("reservation", reservation);
         request.getRequestDispatcher("reservation-details.jsp").forward(request, response);

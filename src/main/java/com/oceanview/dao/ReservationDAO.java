@@ -165,4 +165,20 @@ public class ReservationDAO {
         try { res.setRoomType(rs.getString("room_type")); } catch (Exception ignored) {}
         return res;
     }
+
+    public boolean deleteReservation(int reservationId) {
+        String sql = "DELETE FROM reservations WHERE reservation_id = ? AND status = 'CANCELLED'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, reservationId);
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

@@ -3,6 +3,7 @@ package com.oceanview.controller;
 import com.oceanview.model.Bill;
 import com.oceanview.model.User;
 import com.oceanview.service.BillingService;
+import com.oceanview.service.PaymentService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import java.io.IOException;
 public class GenerateBillServlet extends HttpServlet {
 
     private final BillingService billingService = new BillingService();
+    private final PaymentService paymentService = new PaymentService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,18 +30,30 @@ public class GenerateBillServlet extends HttpServlet {
 
         try {
             int reservationId = Integer.parseInt(resIdParam);
-            String error = billingService.generateBillFromReservation(reservationId);
 
-            if (error == null) {
-                // Bill generated — redirect to bill details
-                Bill bill = billingService.getBillByReservationId(reservationId);
-                response.sendRedirect("bill-details?billId=" + bill.getBillId());
-            } else if (error.startsWith("Bill already exists")) {
-                // Bill exists — show existing bill
-                Bill bill = billingService.getBillByReservationId(reservationId);
+            // 1. Generate bill (or reuse existing)
+            Bill bill = billingService.getBillByReservationId(reservationId);
+            if (bill == null) {
+                String error = billingService.generateBillFromReservation(reservationId);
+                if (error != null) {
+                    response.sendRedirect("reservations");
+                    return;
+                }
+                bill = billingService.getBillByReservationId(reservationId);
+            }
+
+            // 2. Auto-record payment if not already paid
+            if (bill != null && !"PAID".equals(bill.getBillStatus())) {
+                String payError = paymentService.recordPayment(bill.getBillId(), "Cash", bill.getBillAmount());
+                if (payError != null) {
+                    System.err.println("Auto-payment error: " + payError);
+                }
+            }
+
+            // 3. Redirect to bill details
+            if (bill != null) {
                 response.sendRedirect("bill-details?billId=" + bill.getBillId());
             } else {
-                request.setAttribute("errorMessage", error);
                 response.sendRedirect("reservations");
             }
 

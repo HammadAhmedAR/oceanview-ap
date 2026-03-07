@@ -93,7 +93,7 @@ public class AddReservationServlet extends HttpServlet {
 
     private void loadFormData(HttpServletRequest request) {
         List<Guest> guests = guestDAO.getAllGuests();
-        List<Room> rooms = roomDAO.getAllRooms();
+        List<Room> rooms = roomDAO.getAvailableRooms();
         request.setAttribute("guests", guests);
         request.setAttribute("rooms", rooms);
     }

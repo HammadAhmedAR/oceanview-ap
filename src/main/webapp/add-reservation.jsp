@@ -80,18 +80,24 @@
 
                 <div class="mb-3">
                     <label class="form-label">Guest *</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-person"></i></span>
-                        <select class="form-select" name="guestId" required id="guestSelect">
-                            <option value="" selected disabled>Select a guest</option>
-                            <% if (guests != null) {
-                                for (Guest g : guests) { %>
-                            <option value="<%= g.getGuestId() %>">
-                                <%= g.getFullName() %> (<%= g.getPhone() %>)
-                            </option>
-                            <%  }
-                            } %>
-                        </select>
+                    <div class="d-flex gap-2">
+                        <div class="input-group flex-grow-1">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <select class="form-select" name="guestId" required id="guestSelect">
+                                <option value="" selected disabled>Select a guest</option>
+                                <% if (guests != null) {
+                                    for (Guest g : guests) { %>
+                                <option value="<%= g.getGuestId() %>">
+                                    <%= g.getFullName() %> (<%= g.getPhone() %>)
+                                </option>
+                                <%  }
+                                } %>
+                            </select>
+                        </div>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#quickGuestModal"
+                                style="background:rgba(81,207,102,0.15); color:#51cf66; border:1px solid rgba(81,207,102,0.3); border-radius:10px; font-weight:600; white-space:nowrap;">
+                            <i class="bi bi-plus-lg"></i> New
+                        </button>
                     </div>
                 </div>
 
@@ -143,6 +149,54 @@
             </form>
         </div>
 
+    </div>
+</div>
+
+<!-- Quick Add Guest Modal -->
+<div class="modal fade" id="quickGuestModal" tabindex="-1" aria-labelledby="quickGuestLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background:#1a2332; border:1px solid rgba(255,255,255,0.12); border-radius:20px;">
+            <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                <h5 class="modal-title" id="quickGuestLabel" style="color:#fff; font-weight:600;">
+                    <i class="bi bi-person-plus" style="color:#51cf66"></i> Quick Add Guest
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="quick-add-guest">
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">First Name *</label>
+                            <input type="text" class="form-control" name="firstName" required
+                                   placeholder="First name" id="quickFirstName">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" name="lastName" required
+                                   placeholder="Last name" id="quickLastName">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="phone"
+                               placeholder="Phone number" id="quickPhone">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email"
+                               placeholder="Email address" id="quickEmail">
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top:1px solid rgba(255,255,255,0.08);">
+                    <button type="button" class="btn btn-sm" data-bs-dismiss="modal"
+                            style="color:rgba(255,255,255,0.6);">Cancel</button>
+                    <button type="submit" class="btn btn-sm"
+                            style="background:linear-gradient(135deg,#51cf66,#2b8a3e); color:#fff; font-weight:600; border-radius:10px; padding:0.4rem 1.2rem;">
+                        <i class="bi bi-check-lg me-1"></i>Add Guest
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

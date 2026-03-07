@@ -29,10 +29,6 @@ public class PaymentService {
             return "Payment amount must be greater than zero.";
         }
 
-        if (paymentAmount.compareTo(bill.getBillAmount()) != 0) {
-            return "Payment amount must equal the bill amount ($" + bill.getBillAmount() + ").";
-        }
-
         // Validate payment method
         if (paymentMethod == null || paymentMethod.trim().isEmpty()) {
             return "Payment method is required.";

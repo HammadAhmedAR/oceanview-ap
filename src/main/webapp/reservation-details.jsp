@@ -123,20 +123,47 @@
                 <span class="detail-value amount-highlight">$<%= reservation.getTotalAmount() %></span>
             </div>
 
+            <%
+                String paymentStatus = (String) request.getAttribute("paymentStatus");
+                if (paymentStatus == null) paymentStatus = "UNPAID";
+            %>
+            <div class="detail-row">
+                <span class="detail-label">Payment Status</span>
+                <span class="detail-value">
+                    <% if ("PAID".equals(paymentStatus)) { %>
+                        <span style="display:inline-block; background:rgba(81,207,102,0.15); color:#51cf66; font-size:0.7rem; font-weight:600; padding:0.2rem 0.6rem; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px;">Paid</span>
+                    <% } else { %>
+                        <span style="display:inline-block; background:rgba(255,212,59,0.15); color:#ffd43b; font-size:0.7rem; font-weight:600; padding:0.2rem 0.6rem; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px;">Unpaid</span>
+                    <% } %>
+                </span>
+            </div>
+
             <!-- Action Buttons -->
             <div class="d-flex gap-2 mt-4 flex-wrap">
                 <a href="reservations" class="btn-back flex-grow-1 justify-content-center">
                     <i class="bi bi-arrow-left me-1"></i> Back to List
                 </a>
-                <% if ("ACTIVE".equals(reservation.getStatus())) { %>
+                <% if ("ACTIVE".equals(reservation.getStatus()) && !"PAID".equals(paymentStatus)) { %>
                 <a href="generate-bill?reservationId=<%= reservation.getReservationId() %>"
                    class="btn-generate-bill flex-grow-1 justify-content-center d-flex align-items-center">
-                    <i class="bi bi-receipt me-1"></i> Generate Bill
+                    <i class="bi bi-receipt me-1"></i> Generate Bill &amp; Pay
                 </a>
                 <a href="cancel-reservation?reservationId=<%= reservation.getReservationId() %>"
                    class="btn-cancel flex-grow-1 justify-content-center d-flex align-items-center"
                    onclick="return confirm('Are you sure you want to cancel this reservation?')">
                     <i class="bi bi-x-circle me-1"></i> Cancel Reservation
+                </a>
+                <% } else if ("ACTIVE".equals(reservation.getStatus())) { %>
+                <a href="cancel-reservation?reservationId=<%= reservation.getReservationId() %>"
+                   class="btn-cancel flex-grow-1 justify-content-center d-flex align-items-center"
+                   onclick="return confirm('Are you sure you want to cancel this reservation?')">
+                    <i class="bi bi-x-circle me-1"></i> Cancel Reservation
+                </a>
+                <% } else if ("CANCELLED".equals(reservation.getStatus())) { %>
+                <a href="delete-reservation?reservationId=<%= reservation.getReservationId() %>"
+                   class="btn-cancel flex-grow-1 justify-content-center d-flex align-items-center"
+                   onclick="return confirm('This will permanently delete the reservation. Are you sure?')">
+                    <i class="bi bi-trash me-1"></i> Delete Reservation
                 </a>
                 <% } %>
             </div>

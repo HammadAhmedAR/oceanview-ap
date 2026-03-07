@@ -36,6 +36,33 @@ public class RoomDAO {
         return rooms;
     }
 
+    public List<Room> getAvailableRooms() {
+        List<Room> rooms = new ArrayList<>();
+        String sql = "SELECT * FROM rooms WHERE room_id NOT IN (" +
+                     "SELECT DISTINCT room_id FROM reservations WHERE status = 'ACTIVE') " +
+                     "ORDER BY room_code";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Room room = new Room();
+                room.setRoomId(rs.getInt("room_id"));
+                room.setRoomCode(rs.getString("room_code"));
+                room.setRoomType(rs.getString("room_type"));
+                room.setPricePerNight(rs.getBigDecimal("price_per_night"));
+                room.setStatus(rs.getString("status"));
+                rooms.add(room);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rooms;
+    }
+
     public Room getRoomById(int roomId) {
         Room room = null;
         String sql = "SELECT * FROM rooms WHERE room_id = ?";
